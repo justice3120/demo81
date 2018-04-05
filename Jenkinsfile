@@ -52,7 +52,6 @@ pipeline {
           }
           dir ('./charts/demo81') {
             container('maven') {
-              sh "cat ~/.git-credentials"
               sh "make tag"
             }
           }
