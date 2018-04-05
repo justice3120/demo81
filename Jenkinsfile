@@ -49,9 +49,11 @@ pipeline {
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+            sh "git config -l"
           }
           dir ('./charts/demo81') {
             container('maven') {
+              sh "git config -l"
               sh "make tag"
             }
           }
