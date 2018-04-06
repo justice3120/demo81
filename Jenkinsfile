@@ -46,10 +46,10 @@ pipeline {
             sh "git checkout master"
             // until we switch to the new kubernetes / jenkins credential implementation use git credentials store
             sh "git config --global credential.helper store"
+            sh "echo  \"https://\$(GIT_USERNAME):\$(GIT_API_TOKEN)@github.com\"> ~/.git-credentials"
             // so we can retrieve the version in later steps
             sh "echo \$(jx-release-version) > VERSION"
             sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
-            sh "env"
           }
           dir ('./charts/demo81') {
             container('maven') {
